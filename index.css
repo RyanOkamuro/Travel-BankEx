@@ -1,0 +1,51 @@
+* {
+  box-sizing: border box;
+}
+
+body {
+  width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h1 {
+  margin-top: 80px;
+}
+
+fieldset {
+  border: 0;
+}
+
+.travelex {
+  width: 400px;
+  padding: 40px;
+  border-radius: 3px;
+  margin: 10px auto;
+  background: grey;
+}
+
+.travelex legend {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto 40px;
+}
+
+.travelex label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.travelex input, .travelex select {
+  display: block;
+  width: 250px;
+  margin: 0 auto 30px;
+}
+
+button[type="submit"] {   
+  display: block;   
+  width: 250px;   
+  margin: 0 auto 30px; 
+}
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="icon" type="image/png" href="http://cliparts.co/cliparts/8Tx/KxG/8TxKxGXTp.png">
+    <title>Travel BankEx</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header role="banner" class="heading">
+      <h1>Travel BankEx</h1>
+    </header>
+    <form role="form" class="travelex">
+      <fieldset name="forex">
+        <legend>Currency Exchange</legend> 
+        <label for="js-home-currency" class="locate_home">Home Country Currency</label>
+        <select name="js-home-currency" id="js-home-currency" required>
+          <option value="0">USD: US Dollar</option>
+          <option value="1" selected>CNY: Chinese Yuan Renminbi</option>
+          <option value="2">JPY: Japanese Yen</option>
+          <option value="3">EUR: Euro</option>
+          <option value="4">GBP: British Pound</option>
+          <option value="5">INR: Indian Rupee</option>
+          <option value="6">BRL: Brazilian Real</option>
+          <option value="7">CAD: Canadian Dollar</option>
+          <option value="8">AUD: Australian Dollar</option>
+          <option value="9">NZD: New Zealand Dollar</option>
+          <option value="10">CHF: Swiss Franc</option>
+          <option value="11">SEK: Swedish Krona</option>
+          <option value="12">HKD: Hong Kong Dollar</option>
+          <option value="13">SGD: Singapore Dollar</option>
+          <option value="14">KRW: South Korean Won</option>
+          <option value="15">TWD: Taiwan New Dollar</option>
+          <option value="16">KWD: Kuwaiti Dinar</option>
+          <option value="17">BHD: Bahraini Dinar</option>
+          <option value="18">NOK: Norwegian Krone</option>
+          <option value="19">RUB: Russian Ruble</option>
+          <option value="20">MXN: Mexican Peso</option>
+        </select>
+        <label for="js-current-location" class="locate_here">Current Location</label>
+        <input placeholder="Via Maggio 46R, 50125, Florence, Italy" type="text" name="js-current-location" id="js-current-location" />
+        <button type="submit" class="js-submit-button">Submit</button>
+      </fieldset>
+    </form>
+    <main role="main" id="newPageLoader" aria-live="assertive" hidden>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
