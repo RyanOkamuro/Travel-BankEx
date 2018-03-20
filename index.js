@@ -34,6 +34,17 @@ function convertCurrency() {
   `;
 }
 
+//function to choose country and it will select currency
+function activateExchangeWindow() {
+  $('.js-submit-button').click(event=> {
+    event.preventDefault();
+    $('#travel-currency').html(convertCurrency());
+    $('.travelex').hide();
+//return value of current currency
+    //const userInput = $(this).find('#js-home-currency')
+    //$('.pCurrency').text(`${userInput.val()}`);
+});
+}
 
 //Global variables for Google Maps
 let map;
@@ -42,12 +53,12 @@ let places;
 
 //Initiate Google Maps default map location
 function initMap() {
-  let defaultPosition = {lat: 34.019022, lng: -118.492806};
+  let defaultPosition = {lat: 43.766680, lng: 11.248663};
   map = new google.maps.Map(document.getElementById('map'), {
     center: defaultPosition,
     zoom: 15
   });
-  //const userInput = $('#js-current-location');
+//const userInput = $('#js-current-location');
 const autocomplete = new google.maps.places.Autocomplete(document.getElementById('js-current-location'));
 const places = new google.maps.places.PlacesService(map)
 autocomplete.addListener('place_changed', onPlaceChanged);
@@ -89,7 +100,7 @@ function createMarker(place) {
     position: placeLoc
   });
  
- //List banks on right panel
+//List banks on right panel
   let li = document.createElement('li');
   li.textContent = place.name;
   placesList.appendChild(li);
@@ -106,7 +117,7 @@ function createMarker(place) {
 }
 
 function handleCreateApp() {
-  activatePlacesSearch();
+  activateExchangeWindow();
 }
 
 $(handleCreateApp);
