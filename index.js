@@ -1,3 +1,40 @@
+//Fixer endpoint URL
+let endpoint = 'http://data.fixer.io/api/latest'
+let access_key = 'a41ae6aa6920002743d80ef87e0fcb7c'
+
+FIXER_URL = 'http://data.fixer.io/api/latest?access_key=a41ae6aa6920002743d80ef87e0fcb7c';
+
+//Get JSON
+function getDataFromApi(currencySelector, callback) {
+  const settings = {
+  url: 'http://data.fixer.io/api/latest?access_key=a41ae6aa6920002743d80ef87e0fcb7c',
+  dataType: 'jsonp',
+  success: function(json) {
+    alert(json.rates.GBP);
+    alert(json.base);
+    alert(json.timestamp);
+  }
+  }
+  $.ajax(settings);
+}
+
+//function to create convert currency
+function convertCurrency() {
+  return `
+    <table>
+    <tr>
+      <td>Current Currency</td>
+      <td><input id="fromAmount" type="text" placeholder="Amount to Convert"/></td>
+    </tr>
+    <tr>
+      <td>Travel Currency</td>
+      <td><input id="toAmount" type="text" /></td>
+    </tr>
+    </table>
+  `;
+}
+
+
 //Global variables for Google Maps
 let map;
 let infowindow;
@@ -15,6 +52,7 @@ const autocomplete = new google.maps.places.Autocomplete(document.getElementById
 const places = new google.maps.places.PlacesService(map)
 autocomplete.addListener('place_changed', onPlaceChanged);
 
+//Zoom to map location based on location search
 function onPlaceChanged() {
   let place = autocomplete.getPlace();
   if (place.geometry) {
@@ -50,7 +88,8 @@ function createMarker(place) {
     map: map,
     position: placeLoc
   });
-  
+ 
+ //List banks on right panel
   let li = document.createElement('li');
   li.textContent = place.name;
   placesList.appendChild(li);
@@ -65,3 +104,10 @@ function createMarker(place) {
     infowindow.open(map, this);
   });
 }
+
+function handleCreateApp() {
+  activatePlacesSearch();
+}
+
+$(handleCreateApp);
+
