@@ -1,48 +1,55 @@
-//Fixer endpoint URL
-let endpoint = 'http://data.fixer.io/api/latest'
-let access_key = 'a41ae6aa6920002743d80ef87e0fcb7c'
-
-FIXER_URL = 'http://data.fixer.io/api/latest?access_key=a41ae6aa6920002743d80ef87e0fcb7c';
-
-//Get JSON
-function getDataFromApi(currencySelector, callback) {
+//Get JSON & using Ajax
+function getDataFromApi(currencyForex) {
   const settings = {
-  url: 'http://data.fixer.io/api/latest?access_key=a41ae6aa6920002743d80ef87e0fcb7c',
-  dataType: 'jsonp',
-  success: function(json) {
-    alert(json.rates.GBP);
-    alert(json.base);
-    alert(json.timestamp);
-  }
+    'async': true,
+    'crossDomain': true,
+    'url': 'https://api.labstack.com/currency/convert?from=USD&to=CNY&value=1',
+    'method': 'GET',
+    'headers': {
+      'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
+      'Cache-Control': 'no-cache',
+    },
+    'success': function(data){ convertCurrency(data) }
   }
   $.ajax(settings);
 }
 
 //function to create convert currency
-function convertCurrency() {
-  return `
-    <table>
-    <tr>
-      <td>Current Currency</td>
-      <td><input id="fromAmount" type="text" placeholder="Amount to Convert"/></td>
-    </tr>
-    <tr>
-      <td>Travel Currency</td>
-      <td><input id="toAmount" type="text" /></td>
-    </tr>
+function convertCurrency(result) {
+  let converted = `
+  <form role='form' class='exchangeConversion'>
+  <fieldset name='convertCurrency'>
+    <legend>Currency Exchange</legend> 
+    <label for='js-homeland-currency' class='home_currency'></label>
+    <table class='table'>
+      <thead>
+        <tr><th class='home_money'></th>USD<th class='travel_money'>CNY</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id='homeland_money'></td>$1.00<td id='travelingCountry_money'>${result.value}</td>
+        </tr>
+      </tbody>
     </table>
+    <section role="region" class="oneHomelandExchange"></section>
+  </fieldset>
+  </form>
   `;
+  $('#travel-currency').html(converted);
 }
 
 //function to choose country and it will select currency
 function activateExchangeWindow() {
   $('.js-submit-button').click(event=> {
     event.preventDefault();
-    $('#travel-currency').html(convertCurrency());
+    getDataFromApi();
     $('.travelex').hide();
 //return value of current currency
     //const userInput = $(this).find('#js-home-currency')
-    //$('.pCurrency').text(`${userInput.val()}`);
+    //$('.home_currency').text(`${userInput.val()} Amount`);
+    //$('.home_money').text(`${userInput.val()}`)
+    //const userInput = $(this).find('#js-current-country')
+    //$('.travel_money').text(`${userInput.val()}`)
 });
 }
 
