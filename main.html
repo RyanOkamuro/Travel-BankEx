@@ -17,8 +17,8 @@
         <legend>Currency Exchange</legend> 
         <label for="js-home-currency" class="locate_home">Home Country Currency</label>
         <select name="js-home-currency" id="js-home-currency" required>
-          <option value="0">USD: US Dollar</option>
-          <option value="1" selected>CNY: Chinese Yuan Renminbi</option>
+          <option value="0" selected>USD: US Dollar</option>
+          <option value="1">CNY: Chinese Yuan Renminbi</option>
           <option value="2">JPY: Japanese Yen</option>
           <option value="3">EUR: Euro</option>
           <option value="4">GBP: British Pound</option>
@@ -40,12 +40,34 @@
           <option value="20">MXN: Mexican Peso</option>
         </select>
         <label for="js-current-location" class="locate_here">Current Location</label>
-        <input placeholder="Via Maggio 46R, 50125, Florence, Italy" type="text" name="js-current-location" id="js-current-location" />
-        <button type="submit" class="js-submit-button">Submit</button>
+        <input placeholder="Via Maggio 46R, 50125, Florence, Italy" type="text" name="js-current-location" id="js-current-location" required />
+        <label for="js-current-country" class="locate_current_country">Current Location</label>
+        <select name="js-current-country" id="js-current-country" required>
+          <option value="0">U.S.A.</option>
+          <option value="1" selected>China</option>
+          <option value="2">Japan</option>
+          <option value="3">EU</option>
+          <option value="4">United Kingdom</option>
+          <option value="5">India</option>
+          <option value="6">Brazil</option>
+          <option value="7">Canada</option>
+          <option value="8">Australia</option>
+          <option value="9">New Zealand</option>
+          <option value="10">Swizerland</option>
+          <option value="11">Sweden</option>
+          <option value="12">Hong Kong</option>
+          <option value="13">Singapore</option>
+          <option value="14">South Korea</option>
+          <option value="15">Taiwan</option>
+          <option value="16">Kuwait</option>
+          <option value="17">Bahraini</option>
+          <option value="18">Norway</option>
+          <option value="19">Russia</option>
+          <option value="20">Mexico</option>
+        </select>
+        <button role="button" type="submit" class="js-submit-button">Submit</button>
       </fieldset>
-    </form>
-    <main role="main" id="newPageLoader" aria-live="assertive" hidden>
-    </main>
+    </form>  
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
   </body>
