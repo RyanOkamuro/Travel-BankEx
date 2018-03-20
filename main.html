@@ -67,8 +67,8 @@
         </select>
         <button role="button" type="submit" class="js-submit-button">Submit</button>
       </fieldset>
-    </form>
-     <section role="region" id="travel-currency">
+    </form>  
+    <section role="region" id="travel-currency">
     </section>
     <main role="main">
     <section role="region" id="map"></section>
@@ -76,8 +76,9 @@
       <h2>Banks Nearby</h2>
       <ul id="bank_places"></ul>
     </section>
-    </main>  
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCutSZwfHTMo57rrmIEbZKdYm41W83rT98&libraries=places&callback=initMap" async defer></script>
     <script src="index.js"></script>
   </body>
 </html>
