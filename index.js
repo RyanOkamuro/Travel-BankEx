@@ -42,3 +42,26 @@ function callback(results, status) {
   }
 }
 
+//Create bank markers
+function createMarker(place) {
+  let placesList = document.getElementById('bank_places');
+  let placeLoc = place.geometry.location;
+  let marker = new google.maps.Marker({
+    map: map,
+    position: placeLoc
+  });
+  
+  let li = document.createElement('li');
+  li.textContent = place.name;
+  placesList.appendChild(li);
+  li.onclick= function() {
+    google.maps.event.trigger(marker, 'click');
+    //HOW TO MAKE ANIMATION STOP BOUNCING
+    //marker.setAnimation(google.maps.Animation.BOUNCE);
+  };
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name + "<br />"+ place.vicinity);
+    infowindow.open(map, this);
+  });
+}
