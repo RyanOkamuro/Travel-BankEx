@@ -43,7 +43,7 @@ function convertCurrency(result) {
   </fieldset>
   </form> 
   <section role='region' class='foreignExchangeTotal'>
-  <p class='afterExchange'>${result.value}</p>
+  <p class='afterExchange'>Exchange: ${result.value}</p>
   </section> 
   `;
   $('#travel-currency').html(converted);
@@ -55,8 +55,8 @@ function activateExchangeWindow() {
     event.preventDefault();
     getDataFromApi();
     $('.travelex').hide();
-//return value of current currency
-    const userInput = $(this).find('#js-home-currency')
+//Return symbol currency
+    let userInput = $(this).find('#js-home-currency')
     $('.home_currency').text(`${userInput.val()}`);
     //$('.home_money').text(`${userInput.val()}`)
     //const userInput = $(this).find('#js-current-country')
@@ -76,7 +76,7 @@ function initMap() {
     center: defaultPosition,
     zoom: 15
   });
-//const userInput = $('#js-current-location');
+//Autocomplete generator
 const autocomplete = new google.maps.places.Autocomplete(document.getElementById('js-current-location'));
 const places = new google.maps.places.PlacesService(map)
 autocomplete.addListener('place_changed', onPlaceChanged);
@@ -100,7 +100,7 @@ function onPlaceChanged() {
         }, callback);
   }
 }
-
+//Callback to search for banks in nearby bounds area
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (let i = 0; i < results.length; i++) {
@@ -118,9 +118,9 @@ function createMarker(place) {
     position: placeLoc
   });
  
-//List banks on right panel
+//List banks on right-hand panel
   let li = document.createElement('li');
-  li.textContent = place.name;
+  li.textContent = `Bank: ${place.name}; ${place.vicinity}`;
   placesList.appendChild(li);
   li.onclick= function() {
     google.maps.event.trigger(marker, 'click');
@@ -132,7 +132,7 @@ function createMarker(place) {
             $(marker).dequeue();
         }, 1400);
   };
-
+//Create pop-up window over pin items to describe location name & address 
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.setContent(place.name + "<br />"+ place.vicinity);
     infowindow.open(map, this);
