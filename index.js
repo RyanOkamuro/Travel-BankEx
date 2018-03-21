@@ -1,18 +1,20 @@
 //Get JSON & using Ajax
-function getDataFromApi() {
+function getDataFromApi(userInput, userInputForex) {
   const settings = {
     'async': true,
     'crossDomain': true,
-    'url': 'https://api.labstack.com/currency/convert?from=USD&to=CNY&value=1',
+    'url': `https://api.labstack.com/currency/convert?from=USD&to=CNY&value=1`,
     'method': 'GET',
     'headers': {
       'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
       'Cache-Control': 'no-cache',
     },
-    'success': function(data){convertCurrency(data)}
+    'success': function(data){convertCurrency(data, userInput, userInputForex)}
   }
   $.ajax(settings);
 }
+
+
 
 //List of currencies application supports
 const currencySymbols =  
@@ -33,17 +35,17 @@ const currencySymbols =
 'ZMW', 'ZWD'];
 
 //Function to create convert currency
-function convertCurrency(result) {
+function convertCurrency(result, userInput, userInputForex) {
   let converted = `
   <form role='form' class='exchangeConversion'>
   <fieldset name='convertCurrency'>
     <legend>Currency Exchange</legend> 
-    <label for='js-homeland-currency' class='home_currency'></label>
+    <label for='js-homeland-currency' class='home_currency'>${userInput}</label>
     <input placeholder='0.00' type='number' name='js-homeland-currency' id='js-homeland-currency' />
   </fieldset>
   </form> 
   <section role='region' class='foreignExchangeTotal'>
-  <p class='afterExchange'> Currency Name: ${result.value}</p>
+  <p class='afterExchange'> ${userInputForex}: ${result.value}</p>
   </section> 
   `;
   $('#travel-currency').html(converted);
@@ -51,15 +53,18 @@ function convertCurrency(result) {
 
 //function to choose country and it will select currency
 function activateExchangeWindow() {
-  $('.js-submit-button').click(event=> {
+  $('.travelex').submit(event=> {
     event.preventDefault();
-    getDataFromApi();
+    //let currency1 = 
+    let userInput = $('#js-home-currency').find('option:selected').text();
+    let userInputForex = $('#js-current-country').find('option:selected').text();
+    getDataFromApi(userInput, userInputForex);
     $('.travelex').hide();
 //Return symbol currency
-    let userInput = $(this).find('#js-home-currency')
-    $('.home_currency').text(`${userInput.val()}`);
-    //const userInputForex = $(this).find('#js-current-country')
-    //$('.afterExchange').text(`${userInputForex.val()}`)
+    
+    //$('.home_currency').text(`${userInput}`);
+    //let userInputForex = $(this).find('#js-current-country').val();
+    //$('.afterExchange').text(`${userInputForex}`)
 });
 }
 
