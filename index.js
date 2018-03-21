@@ -43,7 +43,7 @@ function convertCurrency(result) {
   </fieldset>
   </form> 
   <section role='region' class='foreignExchangeTotal'>
-  <p class='afterExchange'>Exchange: ${result.value}</p>
+  <p class='afterExchange'> Currency Name: ${result.value}</p>
   </section> 
   `;
   $('#travel-currency').html(converted);
@@ -58,9 +58,8 @@ function activateExchangeWindow() {
 //Return symbol currency
     let userInput = $(this).find('#js-home-currency')
     $('.home_currency').text(`${userInput.val()}`);
-    //$('.home_money').text(`${userInput.val()}`)
-    //const userInput = $(this).find('#js-current-country')
-    //$('.travel_money').text(`${userInput.val()}`)
+    //const userInputForex = $(this).find('#js-current-country')
+    //$('.afterExchange').text(`${userInputForex.val()}`)
 });
 }
 
