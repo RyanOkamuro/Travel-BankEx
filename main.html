@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link rel="icon" type="image/png" href="http://cliparts.co/cliparts/8Tx/KxG/8TxKxGXTp.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
     <title>Travel BankEx</title>
     <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
@@ -23,98 +23,16 @@
           <option value="2">AMD: Armenian Dram</option>
           <option value="3">ANG: Netherlands Antillean Guilder</option>
           <option value="4">AOA: Angolan Kwanza</option>
-          <option value="5">ARS: Argentine Peso</option>
-          <option value="6">AUD: Australian Dollar</option>
-          <option value="7">AWG: Aruban florin</option>
-          <option value="8">AZN: Azerbaijani Manat</option>
-          <option value="9">BAM: Bosnian Convertible Marka</option>
-          <option value="10">BBD: Barbadian Dollar</option>
-          <option value="11">BDT: Bangladeshi Taka</option>
-          <option value="12">BGN: Bulgarian Lev</option>
-          <option value="13">BHD: Bahraini Dinar</option>
-          <option value="14">BIF: Burundian Franc</option>
-          <option value="15">BMD: Bermudian Dollar</option>
-          <option value="16">BND: Bruneian Dollar</option>
-          <option value="17">BOB: Bolivian Bolíviano</option>
-          <option value="18">BRL: Brazilian Real </option>
-          <option value="19">BSD: Bahamian Dollar</option>
-          <option value="21">BTN: Bhutanese Ngultrum</option>
-          <option value="22">BWP: Botswana Pula</option>
-          <option value="23">BYN: Belarusian Ruble</option>
-          <option value="24">BZD: Belize Dollar</option>
-          <option value="25">CAD: Canadian Dollar</option>
-          <option value="26">CDF: Congolese Franc</option>
-          <option value="27">CHF: Swiss Franc</option>
-          <option value="28">CLP: Chile Peso</option>
-          <option value="29">CNY: China Yuan Renminbi</option>
-          <option value="30">COP: Colombia Peso</option>
-          <option value="31">CRC: Costa Rica Colon</option>
-          <option value="32">CUP: Cuba Peso</option>
-          <option value="33">CVE: Cape Verdean Escudo</option>
-          <option value="34">CZK: Czech Republic Koruna</option>
-          <option value="35">DJF: </option>
-          <option value="36">DKK: Denmark Krone</option>
-          <option value="37">DOP: Dominican Republic Peso</option>
-          <option value="38">DZD: </option>
-          <option value="39">EGP: Egypt Pound</option>
-          <option value="40">ERN: </option>
-          <option value="41">ETB: </option>
-          <option value="42">EUR: Euro</option>
-          <option value="43">FJD: Fiji Dollar</option>
-          <option value="44">FKP: </option>
-          <option value="45">GBP: United Kingdom Pound</option>
-          <option value="46">GEL: </option>
-          <option value="47">GHS: Ghana Cedi</option>
-          <option value="48">GIP: Gibraltar Pound</option>
-          <option value="49">GMD: </option>
-          <option value="50">GNF: </option>
-          <option value="51">GTQ: Guatemala Quetzal</option>
-          <option value="52">GYD: Guyana Dollar</option>
-          <option value="53">HKD: Hong Kong Dollar</option>
-          <option value="54">HNL: Honduras Lempira</option>
-          <option value="55">HRK:</option>
-          <option value="56">HTG:</option>
-          <option value="57">HUF: Hungary Forint</option>
-          <option value="58">IDR: Indonesia Rupiah</option>
-          <option value="59">ILS:</option>
-          <option value="60">INR:</option>
-          <option value="61">IQD:</option>
-          <option value="62">IRR: Iran Rial</option>
-          <option value="63">ISK: Israel Shekel</option>
-          <option value="64">JMD: Jamaica Dollar</option>
-          <option value="65">JOD:</option>
-          <option value="66">JPY: Japan Yen</option>
-          <option value="67">KES:</option>
-          <option value="68">KGS: Kyrgyzstan Som</option>
-          <option value="69">KHR:</option>
-
-
         </select>
         <label for="js-current-location" class="locate_here">Current Location</label>
         <input placeholder="Via Maggio 46R, 50125, Florence, Italy" type="text" name="js-current-location" id="js-current-location" required />
         <label for="js-current-country" class="locate_current_country">Current Country</label>
         <select name="js-current-country" id="js-current-country" required>
-          <option value="0">U.S.A.</option>
-          <option value="1">China</option>
-          <option value="2">Japan</option>
-          <option value="3" selected>EU</option>
-          <option value="4">United Kingdom</option>
-          <option value="5">India</option>
-          <option value="6">Brazil</option>
-          <option value="7">Canada</option>
-          <option value="8">Australia</option>
-          <option value="9">New Zealand</option>
-          <option value="10">Swizerland</option>
-          <option value="11">Sweden</option>
-          <option value="12">Hong Kong</option>
-          <option value="13">Singapore</option>
-          <option value="14">South Korea</option>
-          <option value="15">Taiwan</option>
-          <option value="16">Kuwait</option>
-          <option value="17">Bahraini</option>
-          <option value="18">Norway</option>
-          <option value="19">Russia</option>
-          <option value="20">Mexico</option>
+          <option value="0">Afghanistan</option>
+          <option value="1">Albania</option>
+          <option value="2">Armenia</option>
+          <option value="3" selected>Netherlands</option>
+          <option value="4">Angola</option>
         </select>
         <button role="button" type="submit" class="js-submit-button">Submit</button>
       </fieldset>
@@ -122,16 +40,14 @@
     <section role="region" id="travel-currency">
     </section>
     <main role="main">
-    <section role="region" id="map"></section>
-    <section role="region" id="righthand-results">
-      <h2>Banks Nearby</h2>
-      <ul id="bank_places"></ul>
-    </section>
+      <section role="region" id="map"></section>
+      <section role="region" id="righthand-results">
+        <h2>Banks Nearby</h2>
+        <ul id="bank_places"></ul>
+      </section>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCutSZwfHTMo57rrmIEbZKdYm41W83rT98&libraries=places&callback=initMap" async defer></script>
-    
     <script src="index.js"></script>
   </body>
 </html>

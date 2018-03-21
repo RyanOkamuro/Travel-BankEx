@@ -15,7 +15,6 @@ function getDataFromApi(userInput, userInputForex) {
 }
 
 
-
 //List of currencies application supports
 const currencySymbols =  
 ['AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 
@@ -34,6 +33,30 @@ const currencySymbols =
 'VND', 'VUV', 'WST', 'XAF', 'BTC', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 
 'ZMW', 'ZWD'];
 
+//Grab home currency symbol
+//function displayHomeCurrency(forexSymbols) {
+  //variable to get amount of home currency user want to exchange
+  //let exchangeTotalAmount= $('#js-homeland-currency').find('input[type=number]').val();
+  //let homeMoney = [];
+  //for (let i = 0; i < homeMoney.length; i++) {
+    //if (forexSymbols[i] = ${userInput}) {
+      //homeMoney.push(forexSymbols[i]);
+    //}
+  //}
+//}
+//displayHomeCurrency(currencySymbols);
+
+//Grab travel country currency symbol
+//function displayTravelCurrency(forexSymbols) {
+  //let travelMoney = [];
+  //for (let i = 0; i < travelMoney.length; i++) {
+    //if (forexSymbols[i] = ${userInputForex}) {
+      //travelMoney.push(forexSymbols[i]);
+    //}
+  //}
+//}
+//displayTravelCurrency(currencySymbols);
+
 //Function to create convert currency
 function convertCurrency(result, userInput, userInputForex) {
   let converted = `
@@ -51,20 +74,17 @@ function convertCurrency(result, userInput, userInputForex) {
   $('#travel-currency').html(converted);
 }
 
-//function to choose country and it will select currency
+
+//function to submit home country & current country traveling in to move to next page
+
 function activateExchangeWindow() {
   $('.travelex').submit(event=> {
     event.preventDefault();
-    //let currency1 = 
+    //return currency symbol
     let userInput = $('#js-home-currency').find('option:selected').text();
     let userInputForex = $('#js-current-country').find('option:selected').text();
     getDataFromApi(userInput, userInputForex);
     $('.travelex').hide();
-//Return symbol currency
-    
-    //$('.home_currency').text(`${userInput}`);
-    //let userInputForex = $(this).find('#js-current-country').val();
-    //$('.afterExchange').text(`${userInputForex}`)
 });
 }
 
@@ -124,7 +144,7 @@ function createMarker(place) {
  
 //List banks on right-hand panel
   let li = document.createElement('li');
-  li.textContent = `Bank: ${place.name}; ${place.vicinity}`;
+  li.textContent = `Bank: ${place.name} \n ${place.vicinity}`;
   placesList.appendChild(li);
   li.onclick= function() {
     google.maps.event.trigger(marker, 'click');
