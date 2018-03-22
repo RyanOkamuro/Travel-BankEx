@@ -1,64 +1,22 @@
 //Get JSON & using Ajax
-function getDataFromApi(userInput, userInputForex) {
+function getDataFromApi(userInput, userInputForex, homeMoney, travelMoney) {
   const settings = {
     'async': true,
     'crossDomain': true,
-    'url': `https://api.labstack.com/currency/convert?from=USD&to=CNY&value=1`,
+    'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
     'method': 'GET',
     'headers': {
       'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
       'Cache-Control': 'no-cache',
     },
-    'success': function(data){convertCurrency(data, userInput, userInputForex)}
+    'success': function(data){convertCurrency(data, userInput, userInputForex, homeMoney, travelMoney)}
   }
   $.ajax(settings);
 }
 
-
-//List of currencies application supports
-const currencySymbols =  
-['AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 
-'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 
-'BYN', 'BZD', 'CAD', 'CDF', 'CHF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CVE', 
-'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 
-'GBP', 'GEL', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 
-'HTG', 'HUF', 'IDR', 'ILS', 'INR', 'IQD', 'IRR', 'ISK', 'JMD', 'JOD', 'JPY', 
-'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 
-'LKR', 'LRD', 'LSL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 
-'MRO', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 
-'NPR', 'NZD', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 
-'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SEK', 'SGD', 'SHP', 
-'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 
-'TOP', 'TRY', 'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 'USD', 'UYU', 'UZS', 'VEF', 
-'VND', 'VUV', 'WST', 'XAF', 'BTC', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 
-'ZMW', 'ZWD'];
-
-//Grab home currency symbol
-//function displayHomeCurrency(forexSymbols) {
-  //variable to get amount of home currency user want to exchange
-  //let exchangeTotalAmount= $('#js-homeland-currency').find('input[type=number]').val();
-  //let homeMoney = [];
-  //for (let i = 0; i < homeMoney.length; i++) {
-    //if (forexSymbols[i] = ${userInput}) {
-      //homeMoney.push(forexSymbols[i]);
-    //}
-  //}
-//}
-//displayHomeCurrency(currencySymbols);
-
-//Grab travel country currency symbol
-//function displayTravelCurrency(forexSymbols) {
-  //let travelMoney = [];
-  //for (let i = 0; i < travelMoney.length; i++) {
-    //if (forexSymbols[i] = ${userInputForex}) {
-      //travelMoney.push(forexSymbols[i]);
-    //}
-  //}
-//}
-//displayTravelCurrency(currencySymbols);
-
 //Function to create convert currency
-function convertCurrency(result, userInput, userInputForex) {
+function convertCurrency(result, userInput, userInputForex, homeMoney, travelMoney) {
+//let exchangeTotalAmount= $('#js-homeland-currency').find('input[type=number]').val(); 
   let converted = `
   <form role='form' class='exchangeConversion'>
   <fieldset name='convertCurrency'>
@@ -75,15 +33,17 @@ function convertCurrency(result, userInput, userInputForex) {
 }
 
 
-//function to submit home country & current country traveling in to move to next page
 
+//function to submit home country & current country traveling in to move to next page
 function activateExchangeWindow() {
   $('.travelex').submit(event=> {
     event.preventDefault();
     //return currency symbol
     let userInput = $('#js-home-currency').find('option:selected').text();
     let userInputForex = $('#js-current-country').find('option:selected').text();
-    getDataFromApi(userInput, userInputForex);
+    let homeMoney = $('#js-home-currency').val();
+    let travelMoney= $('#js-current-country').val();
+    getDataFromApi(userInput, userInputForex, homeMoney, travelMoney);
     $('.travelex').hide();
 });
 }
@@ -168,4 +128,9 @@ function handleCreateApp() {
 }
 
 $(handleCreateApp);
+
+
+
+
+
 
