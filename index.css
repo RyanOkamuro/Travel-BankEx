@@ -12,19 +12,22 @@
       margin: 0;
       padding: 0;
   }
+
+  h1, h2 {
+    text-align: center;
+  }
     
   #map {
       height: 500px;
-      width: 75%;
+      width: 100%;
       position: relative;
-      display: inline-block;
+      float: left;
   }
 
   #righthand-results {
-    position: absolute;
-    width: 25%;
     height: 500px;
-    display: inline-block;
+    float: left;
+    display: none;
   }
 
   h3 {
@@ -32,10 +35,7 @@
     margin-bottom: 0;
   }
 
-  #righthand-results {
-    display: none;
-  }
-
+  
   ul {
     margin-top: 0;
     height: 475px;
@@ -53,34 +53,30 @@
     background-color: #A8A8A8;
   }
 
-  /*
+  
   .row {
     max-width: 1000px;
     padding-left: 20px;
     padding-right: 20px;
     margin: 0 auto;
   }
-  */
+  
 
   
   /* Clearfix */
-  /*
+  
   .row::before,
   .row::after {
     display: table;
     content: '';
   }
-  */
-
-  /*
+  
   .col-3, .col-9, .col-12 {
     float: left;
     padding-left: 1.04166666%;
     padding-right: 1.04166666%;
   }
-  */
   
-  /*
   @media only screen and (min-width: 640px) {
     .col-3 {
       width: 25%;
@@ -92,4 +88,4 @@
       width: 100%
     }
   }
-  */
+  

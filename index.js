@@ -36,11 +36,13 @@
     let converted = `
     <fieldset name='convertCurrency'>
       <legend>Currency Exchange</legend> 
-      <label for='js-homeland-currency' class='home_currency'>${homeMoney}</label>
-      <input placeholder='0.00' type='number' name='js-homeland-currency' id='js-homeland-currency-input' />
+      <label for='js-homeland-currency' class='home_currency'>${homeMoney} Amount to Exchange</label>
+      <input type='number' placeholder='1.00' name='js-homeland-currency' id='js-homeland-currency-input'  autofocus/>
     </fieldset>
     <section role='region' class='foreignExchangeTotal'>
+    <p class='beforeExchange'> 1 ${homeMoney}: ${result.value} ${travelMoney}</p>
     <p class='afterExchange'> ${travelMoney}: ${result.value}</p>
+    <p class='date'>${result.update_at}</p>
     </section> 
     `;
   
@@ -54,7 +56,7 @@
 
   //Get amount of home currency the user wants to exchange
   function getExchange() {
-    $('#js-homeland-currency-input').change(event => {
+    $('#js-homeland-currency-input').on('input', event => {
       let exchangeTotalAmount = event.currentTarget.value;
       let homeMoney = $('#js-home-currency').val();
       let travelMoney = $('#js-current-country').val();
@@ -85,7 +87,7 @@
 
   //Initiate Google Maps default map location
   function initMap() {
-    let defaultPosition = { lat: 43.766680, lng: 11.248663 };
+    let defaultPosition = {lat: 43.766680, lng: 11.248663};
     map = new google.maps.Map(document.getElementById('map'), {
       center: defaultPosition,
       zoom: 15
@@ -149,7 +151,7 @@
   };
 
   //Create pop-up window over pin items to describe location name & address 
-  google.maps.event.addListener(marker, 'click', function () {
+  google.maps.event.addListener(marker, 'click', function() {
     infowindow.setContent(place.name + "<br />" + place.vicinity);
     infowindow.open(map, this);
   });
