@@ -1,162 +1,160 @@
 
-  //Get JSON
-  function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
-    if (exchangeTotalAmount !== undefined) {
-      const settings = {
-        'async': true,
-        'crossDomain': true,
-        'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=${exchangeTotalAmount}`,
-        'method': 'GET',
-        'headers': {
-          'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
-          'Cache-Control': 'no-cache',
-        },
-        'success': function(data) {convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount)}
-      }
-      $.ajax(settings);
+//Google Maps global variables
+let map;
+let infoWindow;
+let autoComplete;
+let places;
 
-    } else {
-      const settings2 = {
+
+//Initiate Google Maps default map location
+function initMap() {
+    let defaultPosition = { lat: 43.766680, lng: 11.248663 };
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: defaultPosition,
+        zoom: 15
+    });
+    //Autocomplete generator
+    autoComplete = new google.maps.places.Autocomplete(document.getElementById('js-current-location'));
+    places = new google.maps.places.PlacesService(map)
+}
+
+//Get JSON
+function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
+    const settings = {
         'async': true,
         'crossDomain': true,
         'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
         'method': 'GET',
         'headers': {
-          'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
-          'Cache-Control': 'no-cache',
+            'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
+            'Cache-Control': 'no-cache',
         },
-        'success': function(data) {convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount)}
-      }
-      $.ajax(settings2);
+        'success': function (data) { convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) }
     }
-  }
+    $.ajax(settings);
+}
 
-  //Function to create convert currency
-  function convertCurrency(result, homeMoney, travelMoney) {
+//Create currency exchange display function
+function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
+    //Create variable for exchanged total amount  
+    let exchangedTotal = result.value * exchangeTotalAmount;
+    //Create variable for date & time of latest exchange rate data
+    let d = new Date(0);
+    let date = Date.parse(result.updated_at);
+    let currentDate = new Date(d.setUTCSeconds(date));
+    //Create currency exchange display
     let converted = `
-    <fieldset name='convertCurrency'>
-      <legend>Currency Exchange</legend> 
-      <label for='js-homeland-currency' class='home_currency'>${homeMoney}</label>
-      <input placeholder='0.00' type='number' name='js-homeland-currency' id='js-homeland-currency-input' />
-    </fieldset>
+    <form role='form' class='exchangeTable'>
+        <fieldset name='convertCurrency'>
+        <legend>Currency Exchange</legend>
+            <label for='js-homeland-currency' class='home_currency'>${homeMoney}</label>
+            <input placeholder='0.00' type='number' name='js-homeland-currency' id='js-homeland-currency-input' />
+        </fieldset>
+    </form>
     <section role='region' class='foreignExchangeTotal'>
-    <p class='afterExchange'> ${travelMoney}: ${result.value}</p>
+    <p class='oneHomeToTravel'> 1 ${homeMoney}: ${result.value} ${travelMoney}</p>
+    <p class='afterExchange'> ${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
+    <p class='date'>${currentDate}</p>
     </section> 
     `;
-  
+    //Create variable for right-hand panel with bank listings & addresses
+    let rightHandListing = `
+    <ul id="bank_places"></ul>
+    `;
     $('#travel-currency').html(converted);
+    //Display right-hand panel with bank listings & addresses
+    $('#righthand-results').html(rightHandListing);
     getExchange();
-    $('#righthand-results').css('display','inline-block');
-    //let outputElem = $('#righthand-results');
-    //outputElem
-      //.prop('hidden', false)
-  }
+    //Unhide right panel
+    let outputElem = $('#righthand-results');
+    outputElem
+        .prop('hidden', false)
+    onPlaceChanged()
+}
 
-  //Get amount of home currency the user wants to exchange
-  function getExchange() {
-    $('#js-homeland-currency-input').change(event => {
-      let exchangeTotalAmount = event.currentTarget.value;
-      let homeMoney = $('#js-home-currency').val();
-      let travelMoney = $('#js-current-country').val();
-      getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount);
+//Get amount of home currency the user wants to exchange
+function getExchange() {
+    $('#js-homeland-currency-input').on('input', function (event) {
+        let exchangeTotalAmount = event.currentTarget.value;
+        let homeMoney = $('#js-home-currency').val();
+        let travelMoney = $('#js-current-country').val();
+        getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount);
     })
-  }
+}
 
-  //Function to submit home country & current country traveling in to move to next page
-  function activateExchangeWindow() {
-    $('.travelex').submit(event => {
-      event.preventDefault();
-      //Return currency symbol
-      let homeMoney = $('#js-home-currency').val();
-      let travelMoney = $('#js-current-country').val();
-      getDataFromApi(homeMoney, travelMoney);
-      $('.travelex').hide();
-    });
-  }
-
-
-
-
-
-  //Global variables for Google Maps
-  let map;
-  let infowindow;
-  let places;
-
-  //Initiate Google Maps default map location
-  function initMap() {
-    let defaultPosition = { lat: 43.766680, lng: 11.248663 };
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: defaultPosition,
-      zoom: 15
-  });
-
-  //Autocomplete generator
-  const autocomplete = new google.maps.places.Autocomplete(document.getElementById('js-current-location'));
-  const places = new google.maps.places.PlacesService(map)
-  autocomplete.addListener('place_changed', onPlaceChanged);
-
-  //Zoom to map location based on location search
-  function onPlaceChanged() {
-    let place = autocomplete.getPlace();
+//Zoom to map location based on location search
+function onPlaceChanged() {
+    let place = autoComplete.getPlace();
     if (place.geometry) {
-      map.panTo(place.geometry.location);
-      map.setZoom(16);
+        map.panTo(place.geometry.location);
+        map.setZoom(16);
     }
     else if (!place.geometry) {
-      window.alert("No results available for '" + place.name + "'");
-      return;
+        window.alert("No results available for '" + place.name + "'");
+        return;
     }
     infowindow = new google.maps.InfoWindow();
     places.nearbySearch({
-      location: place.geometry.location,
-      bounds: map.getBounds(),
-      type: ['bank']
+        location: place.geometry.location,
+        bounds: map.getBounds(),
+        type: ['bank']
     }, callback);
-    }
-  }
 
-  //Callback to search for banks in nearby bounds area
-  function callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (let i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-    }
-    }
-  }
 
-  //Create bank markers
-  function createMarker(place) {
+    //Callback to search for banks in nearby bounds area
+    function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+                createMarker(results[i]);
+            }
+        }
+    }
+
+    //Create bank markers
+function createMarker(place) {
     let placesList = document.getElementById('bank_places');
     let placeLoc = place.geometry.location;
     let marker = new google.maps.Marker({
-      map: map,
-      position: placeLoc
+        map: map,
+        position: placeLoc
+        });
+
+    //List banks on right-hand panel
+    let li = document.createElement('li');
+    li.innerHTML = `Bank: ${place.name} <br /> Address: ${place.vicinity}`;
+    placesList.appendChild(li);
+    li.onclick = function () {
+        google.maps.event.trigger(marker, 'click');
+        //Make markers bounce when clicking on right-hand panel 
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function () {
+            marker.setAnimation(null);
+            $(marker).dequeue();
+        }, 1200);
+    };
+
+    //Create pop-up window over pin items to describe location name & address 
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(place.name + "<br />" + place.vicinity);
+        infowindow.open(map, this);
+        });
+    }
+}
+
+//Function to submit home country & current country traveling in to move to next page
+function activateExchangeWindow() {
+    $('.travelex').submit(event => {
+        event.preventDefault();
+        //Return currency symbol
+        let homeMoney = $('#js-home-currency').val();
+        let travelMoney = $('#js-current-country').val();
+        getDataFromApi(homeMoney, travelMoney);
+        $('.travelex').hide();
     });
+}
 
-  //List banks on right-hand panel
-  let li = document.createElement('li');
-  li.innerHTML = `Bank: ${place.name} <br /> Address: ${place.vicinity}`;
-  placesList.appendChild(li);
-  li.onclick = function () {
-    google.maps.event.trigger(marker, 'click');
-    //Make markers bounce when clicking on right-hand panel 
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-    setTimeout(function () {
-      marker.setAnimation(null);
-      $(marker).dequeue();
-    }, 1200);
-  };
-
-  //Create pop-up window over pin items to describe location name & address 
-  google.maps.event.addListener(marker, 'click', function () {
-    infowindow.setContent(place.name + "<br />" + place.vicinity);
-    infowindow.open(map, this);
-  });
-  }
-
-  function handleCreateApp() {
+function handleCreateApp() {
     activateExchangeWindow();
-  }
+}
 
-  $(handleCreateApp);
+$(handleCreateApp);

@@ -1,95 +1,43 @@
 * {
   box-sizing: border-box;
+  color: #404040
   }
   
   .travelex label {
     display: block;
     margin-bottom: 5px;
+    margin-top: 5px;
   }
-  
-  html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-  }
-    
+
   #map {
-      height: 500px;
-      width: 75%;
-      position: relative;
-      display: inline-block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      float: left;
   }
 
   #righthand-results {
-    position: absolute;
-    width: 25%;
-    height: 500px;
-    display: inline-block;
-  }
+    height: 100%;
+    width: 300px;
+    position: relative;
+    float: right;
 
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  #righthand-results {
-    display: none;
   }
 
   ul {
     margin-top: 0;
-    height: 475px;
+    height: 100%;
     overflow-y: scroll;
     list-style: none;
     border: 1px black solid;
     padding-left: 0;
+    background-color: #e6e6e6;
   }
 
   li {
-    padding-left: 5px;
+    padding: 12px;
   }
 
   li:nth-child(odd) {
-    background-color: #A8A8A8;
+    background-color: #f1f1f1;
   }
-
-  /*
-  .row {
-    max-width: 1000px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
-  }
-  */
-
-  
-  /* Clearfix */
-  /*
-  .row::before,
-  .row::after {
-    display: table;
-    content: '';
-  }
-  */
-
-  /*
-  .col-3, .col-9, .col-12 {
-    float: left;
-    padding-left: 1.04166666%;
-    padding-right: 1.04166666%;
-  }
-  */
-  
-  /*
-  @media only screen and (min-width: 640px) {
-    .col-3 {
-      width: 25%;
-    }
-    .col-9 {
-      width: 75%;
-    }
-    .col-12 {
-      width: 100%
-    }
-  }
-  */
