@@ -2,26 +2,114 @@
   box-sizing: border-box;
   color: #404040
   }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color:#f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  h1, h2 {
+    text-align: center;
+  }
+
+  h1 {
+    color: #595959;
+  }
+
+  #map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+  }
   
+  .travelex {
+    position: absolute;
+    left: 50%;
+    margin-left: -155px;
+    top: 350px;
+    z-index: 3;
+    width: 310px;
+    background-color: #d9d9d9;
+    padding: 10px;
+    border-radius: 5px;
+  }
+    
+  fieldset {
+    padding: 0;
+    border: 0;
+    margin: 0;
+  }
+
+  .travelex legend {
+    text-align: center;
+    font-weight: bold;
+  }
+
   .travelex label {
     display: block;
     margin-bottom: 5px;
     margin-top: 5px;
   }
 
-  #map {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      float: left;
+  .travelex input, .travelex select, .travelex button {
+    width: 100%;
+    padding: 5px;
+  } 
+
+  .travelex button {
+    margin-top: 5px;
   }
 
-  #righthand-results {
-    height: 100%;
-    width: 300px;
-    position: relative;
-    float: right;
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: #f1f1f1;
+    -webkit-transition: background 0.1s;
+    -moz-transition: background 0.1s;
+    -o-transition: background 0.1s;
+    transition: background 0.1s;
+    outline: none;
+  }
 
+  .exchangeBlock {
+    border: 1px solid black;
+    width: 300px;
+    height: 200px;
+    background-color: #e6e6e6;
+    position: absolute;
+    z-index: 2;
+    padding: 12px;
+  }
+
+  .exchangeBlock legend {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .oneHomeToTravel {
+    margin-top: 2px;
+    font-size: 12px;
+    font-style: italic;
+    position: relative;
+    left: 40px;
+  }
+
+  .exchangeDate {
+    font-size: 15px;
+  }
+
+  #lefthand-results {
+    height: 558px;
+    width: 310px;
+    position: absolute;
+    z-index: 2;
+    top: 200px;
+    padding-left: 10px;
+    margin-left: -10px;
   }
 
   ul {
@@ -31,7 +119,7 @@
     list-style: none;
     border: 1px black solid;
     padding-left: 0;
-    background-color: #e6e6e6;
+    background-color: #d9d9d9;
   }
 
   li {
@@ -39,5 +127,56 @@
   }
 
   li:nth-child(odd) {
+    background-color: #cccccc;
+  }
+
+  li:hover,
+  li:focus {
     background-color: #f1f1f1;
+  }
+
+ 
+  @media only screen and (min-width: 640px) {
+    #lefthand-results {
+      width: 101.5%;
+      height: 30%;
+      position: absolute;
+      top: 850px;
+      padding-left: 10px;
+      margin-left: -10px;
+    }
+
+    .exchangeBlock {
+      width: 100%;
+      position: absolute;
+      top: 650px; 
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) {
+    #lefthand-results {
+      height: 558px;
+      width: 310px;
+      position: absolute;
+      top: 200px;
+      margin-left: -10px;
+    }
+
+    .exchangeBlock {
+      height: 200px;
+      width: 300px;
+      position: absolute;
+      top: 0;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
   }

@@ -1,4 +1,3 @@
-
 //Google Maps global variables
 let map;
 let infoWindow;
@@ -20,18 +19,34 @@ function initMap() {
 
 //Get JSON
 function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
-    const settings = {
-        'async': true,
-        'crossDomain': true,
-        'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
-        'method': 'GET',
-        'headers': {
-            'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
-            'Cache-Control': 'no-cache',
-        },
-        'success': function (data) { convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) }
+    if (exchangeTotalAmount !== undefined) {
+        const settings = {
+            'async': true,
+            'crossDomain': true,
+            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+            'method': 'GET',
+            'headers': {
+                'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
+                'Cache-Control': 'no-cache',
+            },
+            'success': function(data) { convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) }
+        }
+        $.ajax(settings);
+
+    } else {
+        const settings2 = {
+            'async': true,
+            'crossDomain': true,
+            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+            'method': 'GET',
+            'headers': {
+                'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
+                'Cache-Control': 'no-cache',
+            },
+            'success': function(data) { convertCurrency(data, homeMoney, travelMoney, 1) }
+        }
+        $.ajax(settings2);
     }
-    $.ajax(settings);
 }
 
 //Create currency exchange display function
@@ -41,32 +56,34 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
     //Create variable for date & time of latest exchange rate data
     let d = new Date(0);
     let date = Date.parse(result.updated_at);
-    let currentDate = new Date(d.setUTCSeconds(date));
+    let currentDate = new Date(d.setUTCSeconds(date));	
     //Create currency exchange display
     let converted = `
+    <section role ='region' class='exchangeBlock'>
     <form role='form' class='exchangeTable'>
         <fieldset name='convertCurrency'>
         <legend>Currency Exchange</legend>
             <label for='js-homeland-currency' class='home_currency'>${homeMoney}</label>
-            <input placeholder='0.00' type='number' name='js-homeland-currency' id='js-homeland-currency-input' />
+            <input placeholder='1.00' type='number' name='js-homeland-currency' id='js-homeland-currency-input' />
         </fieldset>
     </form>
     <section role='region' class='foreignExchangeTotal'>
-    <p class='oneHomeToTravel'> 1 ${homeMoney}: ${result.value} ${travelMoney}</p>
+    <p class='oneHomeToTravel'> (1 ${homeMoney}: ${result.value} ${travelMoney})</p>
     <p class='afterExchange'> ${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
-    <p class='date'>${currentDate}</p>
+    <p class='date'> Exchange rate last updated: <br /> <span class= 'exchangeDate'>${currentDate}</span></p>
     </section> 
+    </section>
     `;
-    //Create variable for right-hand panel with bank listings & addresses
-    let rightHandListing = `
+    //Create variable for left-hand panel with bank listings & addresses
+    let leftHandListing = `
     <ul id="bank_places"></ul>
     `;
     $('#travel-currency').html(converted);
-    //Display right-hand panel with bank listings & addresses
-    $('#righthand-results').html(rightHandListing);
+    //Display left-hand panel with bank listings & addresses
+    $('#lefthand-results').html(leftHandListing);
     getExchange();
-    //Unhide right panel
-    let outputElem = $('#righthand-results');
+    //Unhide left panel
+    let outputElem = $('#lefthand-results');
     outputElem
         .prop('hidden', false)
     onPlaceChanged()
@@ -74,6 +91,9 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
 
 //Get amount of home currency the user wants to exchange
 function getExchange() {
+    $('.exchangeTable').submit(function (event) {
+        event.preventDefault();
+    })
     $('#js-homeland-currency-input').on('input', function (event) {
         let exchangeTotalAmount = event.currentTarget.value;
         let homeMoney = $('#js-home-currency').val();
@@ -101,42 +121,42 @@ function onPlaceChanged() {
     }, callback);
 
 
-    //Callback to search for banks in nearby bounds area
-    function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (let i = 0; i < results.length; i++) {
-                createMarker(results[i]);
-            }
+//Callback to search for banks in nearby bounds area
+function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (let i = 0; i < results.length; i++) {
+            createMarker(results[i]);
         }
     }
+}
 
-    //Create bank markers
+//Create bank markers
 function createMarker(place) {
     let placesList = document.getElementById('bank_places');
     let placeLoc = place.geometry.location;
     let marker = new google.maps.Marker({
         map: map,
         position: placeLoc
-        });
+    });
 
-    //List banks on right-hand panel
+//List banks on left-hand panel
     let li = document.createElement('li');
     li.innerHTML = `Bank: ${place.name} <br /> Address: ${place.vicinity}`;
     placesList.appendChild(li);
-    li.onclick = function () {
+    li.onclick = function() {
         google.maps.event.trigger(marker, 'click');
-        //Make markers bounce when clicking on right-hand panel 
+        //Make markers bounce when clicking on left-hand panel 
         marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function () {
+        setTimeout(function() {
             marker.setAnimation(null);
             $(marker).dequeue();
-        }, 1200);
-    };
+            }, 1200);
+        };
 
-    //Create pop-up window over pin items to describe location name & address 
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name + "<br />" + place.vicinity);
-        infowindow.open(map, this);
+        //Create pop-up window over pin items to describe location name & address 
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(place.name + "<br />" + place.vicinity);
+            infowindow.open(map, this);
         });
     }
 }
@@ -150,6 +170,7 @@ function activateExchangeWindow() {
         let travelMoney = $('#js-current-country').val();
         getDataFromApi(homeMoney, travelMoney);
         $('.travelex').hide();
+        $('.heading').hide();
     });
 }
 
