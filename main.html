@@ -18,7 +18,7 @@
     <fieldset name="forex">
       <legend>Currency Exchange</legend>
       <label for="js-home-currency" class="locate_home">Home Country Currency</label>
-      <select name="js-home-currency" id="js-home-currency" required>
+      <select name="js-home-currency" id="js-home-currency" required autofocus>
         <option value="AFN">Afghanistan Afghani</option>
         <option value="ALL">Albanian Lek</option>
         <option value="DZD">Algerian Dinar</option>
@@ -169,7 +169,7 @@
       </select>
       <label for="js-current-location" class="locate_here">Current Location</label>
       <input placeholder="Via Maggio 46R, 50125, Florence, Italy" type="text" name="js-current-location" id="js-current-location"
-        required />
+        required/>
       <label for="js-current-country" class="locate_current_country">Current Country</label>
       <select name="js-current-country" id="js-current-country" required>
         <option value="AFN">Afghanistan</option>
@@ -370,14 +370,15 @@
       <button role="button" type="submit" class="js-submit-button">Submit</button>
     </fieldset>
   </form>
-  <section role="region" id="travel-currency">
-  </section>
   <main role="main">
     <section role="region" id="map"></section>
-    <section role="region" id="lefthand-results" aria-live="assertive" hidden>
-    </section>
+    <section role="region" id="left-panel" aria-live="assertive" hidden></section>
+    <section role="region" id="travel-currency"></section>
+    <section role="region" id="lefthand-results" ></section>
   </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="http://momentjs.com/downloads/moment.js"></script>
+  <script src="http://momentjs.com/downloads/moment-timezone-with-data-2012-2022.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCutSZwfHTMo57rrmIEbZKdYm41W83rT98&libraries=places&callback=initMap"
     async defer></script>
   <script src="index.js"></script>

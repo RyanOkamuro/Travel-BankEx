@@ -4,7 +4,6 @@ let infoWindow;
 let autoComplete;
 let places;
 
-
 //Initiate Google Maps default map location
 function initMap() {
     let defaultPosition = { lat: 43.766680, lng: 11.248663 };
@@ -14,7 +13,7 @@ function initMap() {
     });
     //Autocomplete generator
     autoComplete = new google.maps.places.Autocomplete(document.getElementById('js-current-location'));
-    places = new google.maps.places.PlacesService(map)
+    places = new google.maps.places.PlacesService(map);
 }
 
 //Get JSON
@@ -54,23 +53,22 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
     //Create variable for exchanged total amount  
     let exchangedTotal = result.value * exchangeTotalAmount;
     //Create variable for date & time of latest exchange rate data
-    let d = new Date(0);
-    let date = Date.parse(result.updated_at);
-    let currentDate = new Date(d.setUTCSeconds(date));	
+    let date = moment(result.updated_at);
+    let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');	
     //Create currency exchange display
     let converted = `
     <section role ='region' class='exchangeBlock'>
     <form role='form' class='exchangeTable'>
         <fieldset name='convertCurrency'>
         <legend>Currency Exchange</legend>
-            <label for='js-homeland-currency' class='home_currency'>${homeMoney}</label>
-            <input placeholder='1.00' type='number' name='js-homeland-currency' id='js-homeland-currency-input' />
+            <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
+            <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
         </fieldset>
     </form>
     <section role='region' class='foreignExchangeTotal'>
     <p class='oneHomeToTravel'> (1 ${homeMoney}: ${result.value} ${travelMoney})</p>
     <p class='afterExchange'> ${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
-    <p class='date'> Exchange rate last updated: <br /> <span class= 'exchangeDate'>${currentDate}</span></p>
+    <p class='date'> Exchange rate last updated: <br />${currentDate}</p>
     </section> 
     </section>
     `;
@@ -83,7 +81,7 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
     $('#lefthand-results').html(leftHandListing);
     getExchange();
     //Unhide left panel
-    let outputElem = $('#lefthand-results');
+    let outputElem = $('#left-panel');
     outputElem
         .prop('hidden', false)
     onPlaceChanged()
@@ -91,10 +89,10 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
 
 //Get amount of home currency the user wants to exchange
 function getExchange() {
-    $('.exchangeTable').submit(function (event) {
+    $('.exchangeTable').submit(function(event) {
         event.preventDefault();
     })
-    $('#js-homeland-currency-input').on('input', function (event) {
+    $('#js-homeland-currency-input').on('input', function(event) {
         let exchangeTotalAmount = event.currentTarget.value;
         let homeMoney = $('#js-home-currency').val();
         let travelMoney = $('#js-current-country').val();
