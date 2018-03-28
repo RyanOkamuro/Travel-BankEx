@@ -54,10 +54,13 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
     let exchangedTotal = result.value * exchangeTotalAmount;
     //Create variable for date & time of latest exchange rate data
     let date = moment(result.updated_at);
-    let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');	
+    //Below shows date and time currency updated
+    //let currentDate = date.format('MMMM Do YYYY, h:mm:ss a'); 
+    let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');   
     //Create currency exchange display
     let converted = `
-    <section role ='region' class='exchangeBlock'>
+    <section role='region' class='exchangeBlock'>
+    <section role='region' class='currencyExchangeBlock'>
     <form role='form' class='exchangeTable'>
         <fieldset name='convertCurrency'>
         <legend>Currency Exchange</legend>
@@ -66,19 +69,17 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
         </fieldset>
     </form>
     <section role='region' class='foreignExchangeTotal'>
-    <p class='oneHomeToTravel'> (1 ${homeMoney}: ${result.value} ${travelMoney})</p>
-    <p class='afterExchange'> ${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
-    <p class='date'> Exchange rate last updated: <br />${currentDate}</p>
+    <p class='oneHomeToTravel'>(1 ${homeMoney}: ${result.value} ${travelMoney})</p>
+    <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
+    <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
     </section> 
+    </section> 
+    <ul id="bank_places"></ul>
     </section>
     `;
-    //Create variable for left-hand panel with bank listings & addresses
-    let leftHandListing = `
-    <ul id="bank_places"></ul>
-    `;
-    $('#travel-currency').html(converted);
+   
+    $('#left-panel').html(converted);
     //Display left-hand panel with bank listings & addresses
-    $('#lefthand-results').html(leftHandListing);
     getExchange();
     //Unhide left panel
     let outputElem = $('#left-panel');

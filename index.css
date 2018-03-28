@@ -1,188 +1,185 @@
 * {
-  box-sizing: border-box;
-  }
-
-  html, body {
-    color: #404040;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color:#F2F2F2;
-    font-family: 'Open Sans', sans-serif;
-  }
-
-  .heading {
-    text-align: center;
-    color: #FFFFFF;
-    background-color: #2196F3;
-    margin-top: 0;
-    padding-top: 10px;
-    padding-bottom: 10px; 
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  #map {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
-  }
+    box-sizing: border-box;
+    }
   
-  .travelex {
-    position: absolute;
-    left: 50%;
-    margin-left: -160px;
-    top: 350px;
-    z-index: 3;
-    width: 320px;
-    background-color: #d9d9d9;
-    padding: 10px;
-    border-radius: 5px;
-  }
-    
-  fieldset {
-    padding: 0;
-    border: 0;
-    margin: 0;
-  }
-
-  .travelex legend {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
-
-  .travelex label {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
-
-  .travelex input, .travelex select, .travelex button {
-    width: 100%;
-    padding: 5px;
-  } 
-
-  .travelex button {
-    background-color: #1976D2;
-    color: #FFFFFF; 
-  }
-
-  .travelex button {
-    margin-top: 5px;
-  }
-
-  button[type="submit"]:hover,
-  button[type="submit"]:focus {
-    background-color: #2196F3;
-    -webkit-transition: background 0.1s;
-    -moz-transition: background 0.1s;
-    -o-transition: background 0.1s;
-    transition: background 0.1s;
-    outline: none;
-  }
-
-  #left-panel {
-    height: 100vh;
-    position: absolute;
-  }
-
-  .exchangeBlock {
-    border: 1px solid black;
-    height: 200px;
-    background-color: #e6e6e6;
-    position: absolute;
-    z-index: 2;
-    padding: 12px;
-  }
-
-  .exchangeBlock legend {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-
-  .oneHomeToTravel {
-    margin-top: 2px;
-    font-size: 12px;
-    font-style: italic;
-    position: relative;
-    left: 40px;
-  }
-
-  .date {
-    font-size: 14px;
-  }
-
-  #lefthand-results {
-    height: 558px;
-    position: absolute;
-    z-index: 2;
-    top: 200px;
-    padding-left: 10px;
-    margin-left: -10px;
-  }
-
-  ul {
-    margin-top: 0;
-    height: 100%;
-    overflow-y: scroll;
-    list-style: none;
-    border: 1px black solid;
-    padding-left: 0;
-    background-color: #d9d9d9;
-  }
-
-  li {
-    padding: 12px;
-  }
-
-  li:nth-child(odd) {
-    background-color: #cccccc;
-  }
-
-  li:hover,
-  li:focus {
-    background-color: #f1f1f1;
-  }
-
- 
-  @media only screen and (min-width: 640px) {
-    #lefthand-results {
-      width: 101.5%;
-      height: 30%;
-      top: 850px;
-      padding-left: 10px;
-      margin-left: -10px;
+    html, body {
+      color: #404040;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color:#F2F2F2;
+      font-family: 'Open Sans', sans-serif;
     }
-
-    .exchangeBlock {
-      width: 100%;
-      top: 650px; 
-    }
-
-    
   
+    .heading {
+      text-align: center;
+      color: #FFFFFF;
+      background-color: #2196F3;
+      margin-top: 0;
+      padding-top: 10px;
+      padding-bottom: 10px; 
+    }
   
-  @media only screen and (min-width: 768px) {
-    #lefthand-results {
-      height: 558px;
-      width: 310px;
-      top: 200px;
+    h2 {
+      font-size: 22px;
     }
-
-    .exchangeBlock {
-      width: 300px;
-      top: 0;
-    }
-
+  
     #map {
       height: 100%;
       width: 100%;
+      position: absolute;
+      z-index: 1;
+    }
+    
+    .travelex {
+      position: absolute;
+      left: 50%;
+      margin-left: -160px;
+      top: 350px;
+      z-index: 3;
+      width: 320px;
+      background-color: #d9d9d9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+      
+    fieldset {
+      padding: 0;
+      border: 0;
+      margin: 0;
+    }
+  
+    .travelex legend {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+  
+    .travelex label {
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+  
+    .travelex input, .travelex select, .travelex button {
+      width: 100%;
+      padding: 5px;
+    } 
+  
+    .travelex button {
+      background-color: #1976D2;
+      color: #FFFFFF; 
+    }
+  
+    .travelex button {
+      margin-top: 5px;
+    }
+  
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background-color: #2196F3;
+      -webkit-transition: background 0.1s;
+      -moz-transition: background 0.1s;
+      -o-transition: background 0.1s;
+      transition: background 0.1s;
+      outline: none;
+    }
+  
+    .exchangeBlock {
+      border: 1px solid black;
+      height: 100vh;
+      position: absolute;
+      z-index: 2;
+    }
+
+    .currencyExchangeBlock {
+      height: 20%;
+      background-color: #e6e6e6;
+    }
+
+    .exchangeTable {
+      margin-left: 12px;
+    }
+  
+    .exchangeBlock legend {
+      padding-top: 10px;
+      padding-bottom: 10px; 
+      text-align: center;
+      font-weight: bold;
+    }
+  
+    .oneHomeToTravel {
+      margin-top: 4px;
+      font-size: 12px;
+      font-style: italic;
+      position: relative;
+      left: 40px;
+    }
+
+    .afterExchange {
+      margin-left: 12px;
+    }
+  
+    .date {
+      font-size: 14px;
+      margin-left: 12px;
+    }
+
+
+
+    ul {
+      margin-top: -0.5px;
+      height: 80%;
+      border-top: 1px solid black;
+      overflow-y: scroll;
+      list-style: none;
+      padding-left: 0;
+      background-color: #d9d9d9;
+    }
+  
+    li {
+      padding: 12px;
+    }
+  
+    li:nth-child(odd) {
+      background-color: #cccccc;
+    }
+  
+    li:hover,
+    li:focus {
+      background-color: #f1f1f1;
+    }
+  
+   
+    @media only screen and (min-width: 300px) {
+      .exchangeBlock {
+        height: 70%;
+        width: 100%;
+        top: 815px;
+      }
+
+      .currencyExchangeBlock {
+        height: 30%;
+      }
+
+      ul {
+        height: 70%;
+      }
+
+    @media only screen and (min-width: 768px) {  
+      .exchangeBlock {
+        height: 100vh;
+        width: 300px;
+        top: 0;
+      }
+
+      .currencyExchangeBlock {
+        height: 20%;
+      }
+
+      ul {
+        height: 80%;
     }
   }
 }
