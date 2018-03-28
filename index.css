@@ -1,13 +1,13 @@
 * {
   box-sizing: border-box;
-  color: #404040
   }
 
   html, body {
+    color: #404040;
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color:#f2f2f2;
+    background-color:#F2F2F2;
     font-family: 'Open Sans', sans-serif;
   }
 
@@ -20,11 +20,7 @@
     padding-bottom: 10px; 
   }
 
-  h1 {
-    color: #FCFCFC;
-  }
   h2 {
-    color: #F2F2F2;
     font-size: 22px;
   }
 
@@ -88,6 +84,11 @@
     -o-transition: background 0.1s;
     transition: background 0.1s;
     outline: none;
+  }
+
+  #left-panel {
+    height: 100vh;
+    position: absolute;
   }
 
   .exchangeBlock {
@@ -154,7 +155,6 @@
     #lefthand-results {
       width: 101.5%;
       height: 30%;
-      position: absolute;
       top: 850px;
       padding-left: 10px;
       margin-left: -10px;
@@ -162,30 +162,21 @@
 
     .exchangeBlock {
       width: 100%;
-      position: absolute;
       top: 650px; 
     }
 
-    #map {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-    }
-  }
+    
+  
   
   @media only screen and (min-width: 768px) {
     #lefthand-results {
       height: 558px;
       width: 310px;
-      position: absolute;
       top: 200px;
-      margin-left: -10px;
     }
 
     .exchangeBlock {
-      height: 200px;
       width: 300px;
-      position: absolute;
       top: 0;
     }
 
@@ -194,3 +185,4 @@
       width: 100%;
     }
   }
+}
