@@ -42,6 +42,12 @@
       padding: 10px;
       border-radius: 5px;
     }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
       
     .travelex legend {
       text-align: center;
