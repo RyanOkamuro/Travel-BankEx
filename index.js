@@ -60,21 +60,21 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
     //Create currency exchange display
     let converted = `
     <section role='region' class='exchangeBlock'>
-    <section role='region' class='currencyExchangeBlock'>
-    <form role='form' class='exchangeTable'>
-        <fieldset name='convertCurrency'>
-        <legend>Currency Exchange</legend>
-            <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
-            <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
-        </fieldset>
-    </form>
-    <section role='region' class='foreignExchangeTotal'>
-    <p class='oneHomeToTravel'>(1 ${homeMoney}: ${result.value} ${travelMoney})</p>
-    <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
-    <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
-    </section> 
-    </section> 
-    <ul id="bank_places"></ul>
+        <section role='region' class='currencyExchangeBlock'>
+            <form role='form' class='exchangeTable'>
+                <fieldset name='convertCurrency'>
+                <legend>Currency Exchange</legend>
+                <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
+                <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
+                </fieldset>
+            </form>
+            <section role='region' class='foreignExchangeTotal'>
+                <p class='oneHomeToTravel'>(1 ${homeMoney}: ${result.value} ${travelMoney})</p>
+                <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
+                <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
+            </section> 
+        </section> 
+        <ul id="bank_places"></ul>
     </section>
     `;
    
