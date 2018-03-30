@@ -78,13 +78,13 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
     </section>
     `;
    
-    $('#left-panel').html(converted);
-    //Display left-hand panel with bank listings & addresses
+
     getExchange();
     //Unhide left panel
     let outputElem = $('#left-panel');
     outputElem
         .prop('hidden', false)
+        .html(converted);
     onPlaceChanged()
 }
 
