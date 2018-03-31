@@ -14,7 +14,7 @@ API's used: <br />
 -Map: Google Maps <br />
 -Currency: Labstack
 
-Frontend:
+Frontend: <br />
 -JavaScript <br />
 -jQuery <br />
 -AJAX
