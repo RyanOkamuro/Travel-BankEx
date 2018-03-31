@@ -4,18 +4,20 @@
   
     html, body {
       color: #404040;
-      height: 100%;
-      margin: 0;
-      padding: 0;
       background-color:#F2F2F2;
       font-family: 'Open Sans', sans-serif;
     }
   
     .heading {
+      position: absolute;
+      z-index: 2;
+      margin-top: 0;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
       text-align: center;
       color: #FFFFFF;
       background-color: #2196F3;
-      margin-top: 0;
       padding-top: 10px;
       padding-bottom: 10px; 
     }
@@ -34,12 +36,12 @@
     .travelex {
       position: absolute;
       left: 50%;
-      margin-left: -160px;
+      margin-left: -165px;
       top: 350px;
       z-index: 3;
-      width: 320px;
+      width: 330px;
       background-color: #D9D9D9;
-      padding: 10px;
+      padding: 15px;
       border-radius: 5px;
     }
 
@@ -64,17 +66,27 @@
   
     .travelex input, .travelex select, .travelex button {
       width: 100%;
-      padding: 5px;
+      padding: 6px;
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 3px;
     } 
   
-    .travelex button {
+    .travelex button, .exchangeBlock button {
       background-color: #1976D2;
       color: #FFFFFF; 
     }
   
-    .travelex button {
-      margin-top: 5px;
+    .travelex button { 
+      margin-top: 10px;
     }
+
+    .exchangeBlock input, .exchangeBlock button {
+      border: none;
+      padding: 6px;
+      border-radius: 3px;
+    }
+   
   
     button[type="submit"]:hover,
     button[type="submit"]:focus {
@@ -87,25 +99,25 @@
     }
   
     .exchangeBlock {
-      border: 1px solid black;
+      border: 1px solid #0D0D0D;
       height: 100vh;
       position: absolute;
-      z-index: 2;
-    }
-
-    .currencyExchangeBlock {
-      height: 20%;
-      background-color: #e6e6e6;
+      z-index: 4;
     }
 
     .exchangeTable {
-      margin-left: 12px;
+      height: 20%;
+      padding-left: 12px;
+      background-color: #E6E6E6;
     }
+
+
   
     .exchangeBlock legend {
-      padding-top: 10px;
-      padding-bottom: 10px; 
+      padding-top: 20px;
+      padding-bottom: 15px; 
       text-align: center;
+      font-size: 18px;
       font-weight: bold;
     }
   
@@ -113,23 +125,17 @@
       margin-top: 4px;
       font-size: 12px;
       font-style: italic;
-      position: relative;
-      left: 40px;
-    }
-
-    .afterExchange {
-      margin-left: 12px;
+      text-indent: 10%;
     }
   
     .date {
       font-size: 14px;
-      margin-left: 12px;
     }
 
     ul {
       margin-top: -0.5px;
       height: 80%;
-      border-top: 1px solid black;
+      border-top: 1px solid #0D0D0D;
       overflow-y: scroll;
       list-style: none;
       padding-left: 0;
@@ -152,28 +158,36 @@
   
    
     @media only screen and (min-width: 300px) {
-      .exchangeBlock {
-        height: 70%;
-        width: 100%;
-        top: 815px;
+      .travelex {
+        top: 285px;
       }
 
-      .currencyExchangeBlock {
-        height: 30%;
+      .exchangeBlock {
+        height: 600px;
+        width: 100%;
+        top: 500px;
+      }
+
+      .exchangeTable {
+        height: 35%;
       }
 
       ul {
-        height: 70%;
+        height: 65%;
       }
 
-    @media only screen and (min-width: 768px) {  
+    @media only screen and (min-width: 768px) {
+      .travelex {
+        top: 350px;
+      }
+      
       .exchangeBlock {
         height: 100vh;
-        width: 300px;
+        width: 340px;
         top: 0;
       }
 
-      .currencyExchangeBlock {
+      .exchangeTable {
         height: 20%;
       }
 
@@ -181,4 +195,4 @@
         height: 80%;
       }
     }
-  }
+}

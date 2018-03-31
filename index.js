@@ -3,6 +3,7 @@ let map;
 let infoWindow;
 let autoComplete;
 let places;
+let place;
 
 //Initiate Google Maps default map location
 function initMap() {
@@ -17,7 +18,10 @@ function initMap() {
 }
 
 //Get JSON
-function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
+function getDataFromApi() {
+    let homeMoney = $('#js-home-currency').val();
+    let travelMoney = $('#js-current-country').val();
+    let exchangeTotalAmount = $('#js-homeland-currency-input').val();
     if (exchangeTotalAmount !== undefined) {
         const settings = {
             'async': true,
@@ -48,29 +52,25 @@ function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
     }
 }
 
-//Create currency exchange display function
-function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
-    //Create variable for exchanged total amount  
+//Create currency exchange display
+function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) { 
     let exchangedTotal = result.value * exchangeTotalAmount;
-    //Create variable for date & time of latest exchange rate data
     let date = moment(result.updated_at);
     let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');     
     //Create currency exchange display
     let converted = `
     <section role='region' class='exchangeBlock'>
-        <section role='region' class='currencyExchangeBlock'>
-            <form role='form' class='exchangeTable'>
-                <fieldset name='convertCurrency'>
-                <legend>Currency Exchange</legend>
-                <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
-                <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
-                <button role="button" type="submit" class="js-submit-currency">Submit</button>
-                <p class='oneHomeToTravel'>(1 ${homeMoney}: ${result.value} ${travelMoney})</p>
-                <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${exchangedTotal} ${travelMoney}</p>
-                <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
-                </fieldset>
-            </form>
-        </section> 
+        <form role='form' class='exchangeTable'>
+            <fieldset name='convertCurrency'>
+            <legend>Currency Exchange</legend>
+            <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
+            <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
+            <button role="button" type="submit" class="js-submit-currency">Submit</button>
+            <p class='oneHomeToTravel'>(1 ${homeMoney}: ${numeral(result.value).format('$0,0.00')} ${travelMoney})</p>
+            <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${numeral(exchangedTotal).format('$0,0.00')} ${travelMoney}</p>
+            <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
+            </fieldset>
+        </form>
         <ul id="bank_places"></ul>
     </section>
     `;
@@ -80,31 +80,35 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
         .prop('hidden', false)
         .html(converted);
     getExchange();
-    onPlaceChanged();
+    locateBanks();
 }
 
 //Get amount of home currency the user wants to exchange
 function getExchange() {
     $('.exchangeTable').submit(event => {
         event.preventDefault();
-        let exchangeTotalAmount = $('#js-homeland-currency-input').val();
-        let homeMoney = $('#js-home-currency').val();
-        let travelMoney = $('#js-current-country').val();
-        getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount);
+        getDataFromApi();
     })
 }
 
 //Zoom to map location based on location search
 function onPlaceChanged() {
-    let place = autoComplete.getPlace();
+    place = autoComplete.getPlace();
     if (place.geometry) {
+        $('.travelex').hide();
+        $('.heading').hide();
         map.panTo(place.geometry.location);
         map.setZoom(16);
+        getDataFromApi();
     }
     else if (!place.geometry) {
-        window.alert("No results available for '" + place.name + "'");
-        history.go(-1);
+        window.alert("Select location from autocomplete list");
+        $('.exchangeBlock').hide();
+        return;
     }
+}
+
+function locateBanks() {
     infowindow = new google.maps.InfoWindow();
     places.nearbySearch({
         location: place.geometry.location,
@@ -158,11 +162,7 @@ function activateExchangeWindow() {
     $('.travelex').submit(event => {
         event.preventDefault();
         //Return currency symbol
-        let homeMoney = $('#js-home-currency').val();
-        let travelMoney = $('#js-current-country').val();
-        getDataFromApi(homeMoney, travelMoney);
-        $('.travelex').hide();
-        $('.heading').hide();
+        onPlaceChanged();
     });
 }
 
