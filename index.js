@@ -52,12 +52,11 @@ function getDataFromApi() {
     }
 }
 
-//Create currency exchange display
+//Create currency exchange left panel display
 function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) { 
     let exchangedTotal = result.value * exchangeTotalAmount;
     let date = moment(result.updated_at);
     let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');     
-    //Create currency exchange display
     let converted = `
     <section role='region' class='exchangeBlock'>
         <form role='form' class='exchangeTable'>
@@ -74,7 +73,7 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
         <ul id="bank_places"></ul>
     </section>
     `;
-    //Display left-hand panel with bank listings & addresses
+    //Display left-hand panel bank listings & addresses
     let outputElem = $('#left-panel');
     outputElem
         .prop('hidden', false)
@@ -108,6 +107,7 @@ function onPlaceChanged() {
     }
 }
 
+//Search for banks in nearby region
 function locateBanks() {
     infowindow = new google.maps.InfoWindow();
     places.nearbySearch({
@@ -116,8 +116,6 @@ function locateBanks() {
         type: ['bank']
     }, callback);
 
-
-//Callback to search for banks in nearby bounds area
 function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
@@ -139,9 +137,9 @@ function createMarker(place) {
     let li = document.createElement('li');
     li.innerHTML = `Bank: ${place.name} <br /> Address: ${place.vicinity}`;
     placesList.appendChild(li);
+    //Make markers bounce when clicking on left-hand panel 
     li.onclick = function() {
         google.maps.event.trigger(marker, 'click');
-        //Make markers bounce when clicking on left-hand panel 
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
             marker.setAnimation(null);
@@ -161,7 +159,6 @@ function createMarker(place) {
 function activateExchangeWindow() {
     $('.travelex').submit(event => {
         event.preventDefault();
-        //Return currency symbol
         onPlaceChanged();
     });
 }

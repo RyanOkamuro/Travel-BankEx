@@ -87,7 +87,6 @@
       border-radius: 3px;
     }
    
-  
     button[type="submit"]:hover,
     button[type="submit"]:focus {
       background-color: #2196F3;
@@ -110,8 +109,6 @@
       padding-left: 12px;
       background-color: #E6E6E6;
     }
-
-
   
     .exchangeBlock legend {
       padding-top: 20px;
