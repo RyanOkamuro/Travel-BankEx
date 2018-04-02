@@ -23,6 +23,8 @@ Frontend: <br />
 -JavaScript <br />
 -jQuery <br />
 -AJAX
+-HTML
+-CSS
 
 
 Usage
