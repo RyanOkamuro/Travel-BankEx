@@ -12,7 +12,7 @@ Landing Page:
 Currency Exchange Converter, Bank List, Bank Map Locations:
 ![Currency Exchange & Bank List](https://raw.githubusercontent.com/RyanOkamuro/Travel-BankEx/master/Travel_BankEx_Currency_Exchange_and_Bank_List.JPG)
 
-----------
+
 Built With
 ----------
 API's: <br />
@@ -24,20 +24,19 @@ Frontend: <br />
 -jQuery <br />
 -AJAX
 
---------
+
 Usage
 --------
 -Exchange currencies based on home country and traveling to country <br />
 -Daily exchange rate updates <br />
 -Locate nearby banks based on current location in traveling country 
 
---------
+
 Link
 --------
 https://ryanokamuro.github.io/Travel-BankEx/
 
 
---------
 Author
 --------
 Ryan Okamuro
