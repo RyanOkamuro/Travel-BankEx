@@ -6,11 +6,31 @@ Directed at global travelers who need to exchange money abroad.  Users can recei
 
 Screenshots
 -----------
+Landing Page:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Currency Exchange Converter, Bank List, Bank Map Locations:
 
 ----------
 Built With
 ----------
-API's used: <br />
+API's: <br />
 -Map: Google Maps <br />
 -Currency: Labstack
 

@@ -32,7 +32,9 @@ function getDataFromApi() {
                 'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
                 'Cache-Control': 'no-cache',
             },
-            'success': function(data) { convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) }
+            'success': function(data) { 
+                convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
+            }
         }
         $.ajax(settings);
 
@@ -46,7 +48,9 @@ function getDataFromApi() {
                 'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
                 'Cache-Control': 'no-cache',
             },
-            'success': function(data) { convertCurrency(data, homeMoney, travelMoney, 1) }
+            'success': function(data) { 
+                convertCurrency(data, homeMoney, travelMoney, 1) 
+            }
         }
         $.ajax(settings2);
     }
