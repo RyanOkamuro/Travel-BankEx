@@ -22,8 +22,8 @@ API's: <br />
 Frontend: <br />
 -JavaScript <br />
 -jQuery <br />
--AJAX
--HTML
+-AJAX <br />
+-HTML <br />
 -CSS
 
 
