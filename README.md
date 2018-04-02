@@ -32,7 +32,7 @@ Usage
 -Locate nearby banks based on current location in traveling country 
 
 
-Link
+Demo
 --------
 https://ryanokamuro.github.io/Travel-BankEx/
 
