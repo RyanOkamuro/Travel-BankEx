@@ -7,25 +7,10 @@ Directed at global travelers who need to exchange money abroad.  Users can recei
 Screenshots
 -----------
 Landing Page:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Landing Page](https://raw.githubusercontent.com/RyanOkamuro/Travel-BankEx/master/Travel_BankEx_Landing_Page.JPG)
 
 Currency Exchange Converter, Bank List, Bank Map Locations:
+![Currency Exchange & Bank List](https://raw.githubusercontent.com/RyanOkamuro/Travel-BankEx/master/Travel_BankEx_Currency_Exchange_and_Bank_List.JPG)
 
 ----------
 Built With

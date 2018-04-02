@@ -159,7 +159,7 @@ function createMarker(place) {
     }
 }
 
-//Function to submit home country & current country traveling in to move to next page
+//Function to submit home country & current country traveling in information to move to next page
 function activateExchangeWindow() {
     $('.travelex').submit(event => {
         event.preventDefault();
