@@ -125,11 +125,20 @@
     margin-top: 4px;
     font-size: 12px;
     font-style: italic;
- 
+  }
+
+  img {
+    height: 25px;
+    width: 25px;
+    position: relative;
+    left: 70px;
+    bottom: -20px;
+    float: left;
   }
 
   .date {
     font-size: 14px;
+    float: left;
   }
 
   ul {
@@ -160,7 +169,7 @@
   
   @media only screen and (min-width: 300px) {
     .travelex {
-      top: 285px;
+      top: 265px;
     }
 
     .exchangeBlock {

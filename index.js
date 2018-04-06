@@ -72,6 +72,7 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
             <p class='oneHomeToTravel'>(1 ${homeMoney}: ${numeral(result.value).format('$0,0.00')} ${travelMoney})</p>
             <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${numeral(exchangedTotal).format('$0,0.00')} ${travelMoney}</p>
             <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
+            <a href='https://ryanokamuro.github.io/Travel-BankEx/'><img src='https://cdn4.iconfinder.com/data/icons/basic-interface-overcolor/512/home-512.png' alt='home-button'></a>
             </fieldset>
         </form>
         <ul id="bank_places"></ul>
