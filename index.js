@@ -23,36 +23,28 @@ function getDataFromApi() {
     let travelMoney = $('#js-current-country').val();
     let exchangeTotalAmount = $('#js-homeland-currency-input').val();
     if (exchangeTotalAmount !== undefined) {
-        const settings = {
-            'async': true,
-            'crossDomain': true,
-            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
-            'method': 'GET',
-            'headers': {
-                'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
-                'Cache-Control': 'no-cache',
-            },
-            'success': function(data) { 
-                convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
-            }
-        }
+        let settings = developSettings(homeMoney, travelMoney, exchangeTotalAmount);
         $.ajax(settings);
-
     } else {
-        const settings2 = {
-            'async': true,
-            'crossDomain': true,
-            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
-            'method': 'GET',
-            'headers': {
-                'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
-                'Cache-Control': 'no-cache',
-            },
-            'success': function(data) { 
-                convertCurrency(data, homeMoney, travelMoney, 1) 
-            }
+        let settings = developSettings(homeMoney, travelMoney, 1);
+        $.ajax(settings);
+    }
+} 
+
+
+function developSettings(homeMoney, travelMoney, exchangeTotalAmount) {
+    let settings = {
+        'async': true,
+        'crossDomain': true,
+        'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+        'method': 'GET',
+        'headers': {
+            'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
+            'Cache-Control': 'no-cache',
+        },
+        'success': function(data) { 
+            convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
         }
-        $.ajax(settings2);
     }
 }
 
