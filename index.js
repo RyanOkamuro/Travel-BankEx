@@ -18,35 +18,43 @@ function initMap() {
 }
 
 //Get JSON
-function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
-    let settings = {
-        'async': true,
-        'crossDomain': true,
-        'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
-        'method': 'GET',
-        'headers': {
-            'Authorization': 'Bearer 5qCpoR1yN5ePigTWl2G1kG5T5tX8fAuV',
-            'Cache-Control': 'no-cache',
-        },
-        'success': function(data) { 
-            convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
-        },
-    }
-    return settings;
-}
-
-function displayExchangeConversion() {
+function getDataFromApi() {
     let homeMoney = $('#js-home-currency').val();
     let travelMoney = $('#js-current-country').val();
     let exchangeTotalAmount = $('#js-homeland-currency-input').val();
     if (exchangeTotalAmount !== undefined) {
-        let settings = getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount);
+        const settings = {
+            'async': true,
+            'crossDomain': true,
+            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+            'method': 'GET',
+            'headers': {
+                'Authorization': 'Bearer AjAmdRVxvLjrosnHxrstxQZ9nUen87lD',
+                'Cache-Control': 'no-cache',
+            },
+            'success': function(data) { 
+                convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
+            }
+        }
         $.ajax(settings);
+
     } else {
-        let settings = getDataFromApi(homeMoney, travelMoney, 1);
-        $.ajax(settings);
+        const settings2 = {
+            'async': true,
+            'crossDomain': true,
+            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+            'method': 'GET',
+            'headers': {
+                'Authorization': 'Bearer AjAmdRVxvLjrosnHxrstxQZ9nUen87lD',
+                'Cache-Control': 'no-cache',
+            },
+            'success': function(data) { 
+                convertCurrency(data, homeMoney, travelMoney, 1) 
+            }
+        }
+        $.ajax(settings2);
     }
-} 
+}
 
 //Create currency exchange left panel display
 function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) { 
@@ -83,7 +91,6 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
 function getExchange() {
     $('.exchangeTable').submit(event => {
         event.preventDefault();
-        displayExchangeConversion();
         getDataFromApi();
     })
 }
@@ -96,7 +103,6 @@ function onPlaceChanged() {
         $('.heading').hide();
         map.panTo(place.geometry.location);
         map.setZoom(16);
-        displayExchangeConversion();
         getDataFromApi();
     }
     else if (!place.geometry) {
