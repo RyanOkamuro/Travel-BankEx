@@ -18,21 +18,7 @@ function initMap() {
 }
 
 //Get JSON
-function getDataFromApi() {
-    let homeMoney = $('#js-home-currency').val();
-    let travelMoney = $('#js-current-country').val();
-    let exchangeTotalAmount = $('#js-homeland-currency-input').val();
-    if (exchangeTotalAmount !== undefined) {
-        let settings = developSettings(homeMoney, travelMoney, exchangeTotalAmount);
-        $.ajax(settings);
-    } else {
-        let settings = developSettings(homeMoney, travelMoney, 1);
-        $.ajax(settings);
-    }
-} 
-
-
-function developSettings(homeMoney, travelMoney, exchangeTotalAmount) {
+function getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount) {
     let settings = {
         'async': true,
         'crossDomain': true,
@@ -44,9 +30,23 @@ function developSettings(homeMoney, travelMoney, exchangeTotalAmount) {
         },
         'success': function(data) { 
             convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
-        }
+        },
     }
+    return settings;
 }
+
+function displayExchangeConversion() {
+    let homeMoney = $('#js-home-currency').val();
+    let travelMoney = $('#js-current-country').val();
+    let exchangeTotalAmount = $('#js-homeland-currency-input').val();
+    if (exchangeTotalAmount !== undefined) {
+        let settings = getDataFromApi(homeMoney, travelMoney, exchangeTotalAmount);
+        $.ajax(settings);
+    } else {
+        let settings = getDataFromApi(homeMoney, travelMoney, 1);
+        $.ajax(settings);
+    }
+} 
 
 //Create currency exchange left panel display
 function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) { 
@@ -83,6 +83,7 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
 function getExchange() {
     $('.exchangeTable').submit(event => {
         event.preventDefault();
+        displayExchangeConversion();
         getDataFromApi();
     })
 }
@@ -95,6 +96,7 @@ function onPlaceChanged() {
         $('.heading').hide();
         map.panTo(place.geometry.location);
         map.setZoom(16);
+        displayExchangeConversion();
         getDataFromApi();
     }
     else if (!place.geometry) {
