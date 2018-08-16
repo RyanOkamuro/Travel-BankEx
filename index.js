@@ -29,7 +29,6 @@ function getDataFromApi() {
             'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=y`,
             'method': 'GET',
             'success': function(exchangeVal) { 
-                console.log(exchangeVal, '$')
                 convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) 
             }
         }
