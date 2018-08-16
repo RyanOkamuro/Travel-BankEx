@@ -26,14 +26,11 @@ function getDataFromApi() {
         const settings = {
             'async': true,
             'crossDomain': true,
-            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=y`,
             'method': 'GET',
-            'headers': {
-                'Authorization': 'Bearer AjAmdRVxvLjrosnHxrstxQZ9nUen87lD',
-                'Cache-Control': 'no-cache',
-            },
-            'success': function(data) { 
-                convertCurrency(data, homeMoney, travelMoney, exchangeTotalAmount) 
+            'success': function(exchangeVal) { 
+                console.log(exchangeVal, '$')
+                convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) 
             }
         }
         $.ajax(settings);
@@ -42,14 +39,10 @@ function getDataFromApi() {
         const settings2 = {
             'async': true,
             'crossDomain': true,
-            'url': `https://api.labstack.com/currency/convert?from=${homeMoney}&to=${travelMoney}&value=1`,
+            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=y`,
             'method': 'GET',
-            'headers': {
-                'Authorization': 'Bearer AjAmdRVxvLjrosnHxrstxQZ9nUen87lD',
-                'Cache-Control': 'no-cache',
-            },
-            'success': function(data) { 
-                convertCurrency(data, homeMoney, travelMoney, 1) 
+            'success': function(exchangeVal) { 
+                convertCurrency(exchangeVal, homeMoney, travelMoney, 1) 
             }
         }
         $.ajax(settings2);
@@ -57,9 +50,10 @@ function getDataFromApi() {
 }
 
 //Create currency exchange left panel display
-function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) { 
-    let exchangedTotal = result.value * exchangeTotalAmount;
-    let date = moment(result.updated_at);
+function convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) {
+    let currencyPair = `${homeMoney}_${travelMoney}`
+    let exchangedTotal = exchangeVal[currencyPair].val * exchangeTotalAmount;
+    let date = moment(exchangeVal.updated_at);
     let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');     
     let converted = `
     <section role='region' class='exchangeBlock'>
@@ -69,7 +63,7 @@ function convertCurrency(result, homeMoney, travelMoney, exchangeTotalAmount) {
             <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
             <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
             <button role="button" type="submit" class="js-submit-currency">Submit</button>
-            <p class='oneHomeToTravel'>(1 ${homeMoney}: ${numeral(result.value).format('$0,0.00')} ${travelMoney})</p>
+            <p class='oneHomeToTravel'>(1 ${homeMoney}: ${numeral(exchangeVal[currencyPair].val).format('$0,0.00')} ${travelMoney})</p>
             <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${numeral(exchangedTotal).format('$0,0.00')} ${travelMoney}</p>
             <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
             <a href='https://ryanokamuro.github.io/Travel-BankEx/'><img src='https://cdn4.iconfinder.com/data/icons/basic-interface-overcolor/512/home-512.png' alt='home-button'></a>
