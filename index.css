@@ -67,6 +67,7 @@
   .travelex input, .travelex select, .travelex button {
     width: 100%;
     padding: 6px;
+    height: 34px;
     border: none;
     border-radius: 3px;
     margin-bottom: 3px;
@@ -164,10 +165,9 @@
   }
   
   
-  
   @media only screen and (min-width: 300px) {
     .travelex {
-      top: 265px;
+      top: 230px;
     }
 
     .exchangeBlock {
@@ -179,7 +179,7 @@
 
   @media only screen and (min-width: 768px) {
     .travelex {
-      top: 350px;
+      top: 275px;
     }
     
     .exchangeBlock {

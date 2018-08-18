@@ -10,7 +10,8 @@ function initMap() {
     let defaultPosition = { lat: 43.766680, lng: 11.248663 };
     map = new google.maps.Map(document.getElementById('map'), {
         center: defaultPosition,
-        zoom: 15
+        zoom: 15,
+        disableDefaultUI: true
     });
     //Autocomplete generator
     autoComplete = new google.maps.places.Autocomplete(document.getElementById('js-current-location'));
