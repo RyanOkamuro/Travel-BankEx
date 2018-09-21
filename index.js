@@ -4,6 +4,7 @@ let infoWindow;
 let autoComplete;
 let places;
 let place;
+let converted;
 
 //Initiate Google Maps default map location
 function initMap() {
@@ -55,7 +56,7 @@ function convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmoun
     let exchangedTotal = exchangeVal[currencyPair].val * exchangeTotalAmount;
     let date = moment(exchangeVal.updated_at);
     let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');     
-    let converted = `
+    converted = `
     <section role='region' class='exchangeBlock'>
         <form role='form' class='exchangeTable'>
             <fieldset name='convertCurrency'>
@@ -159,11 +160,32 @@ function activateExchangeWindow() {
     $('.travelex').submit(event => {
         event.preventDefault();
         onPlaceChanged();
+        routie('forex-bank')
     });
 }
 
 function handleCreateApp() {
     activateExchangeWindow();
+    routie('', function() {
+        $('#left-panel').prop('hidden', true);
+        let outputElem = $('#map');
+            outputElem
+                .prop('hidden', false)
+                $('.travelex').show();
+                $('.heading').show();
+    });
+    routie('forex-bank', function() {
+        getDataFromApi();
+        getExchange()
+        $('.heading').hide();
+        $('.travelex').hide();
+        let outputElem = $('#left-panel');
+            outputElem
+                .prop('hidden', false)
+                .html(converted);
+                getExchange();
+                locateBanks();
+    });
 }
 
 $(handleCreateApp);
