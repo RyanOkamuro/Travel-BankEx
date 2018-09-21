@@ -165,6 +165,7 @@ function activateExchangeWindow() {
 }
 
 function handleCreateApp() {
+    initMap();
     activateExchangeWindow();
     routie('', function() {
         $('#left-panel').prop('hidden', true);
