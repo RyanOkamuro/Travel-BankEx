@@ -28,7 +28,7 @@ function getDataFromApi() {
         const settings = {
             'async': true,
             'crossDomain': true,
-            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=y`,
+            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=ultra&apiKey=01c5efd6247a2b380214`,
             'method': 'GET',
             'success': function(exchangeVal) { 
                 convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) 
@@ -40,7 +40,7 @@ function getDataFromApi() {
         const settings2 = {
             'async': true,
             'crossDomain': true,
-            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=y`,
+            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=ultra&apiKey=01c5efd6247a2b380214`,
             'method': 'GET',
             'success': function(exchangeVal) { 
                 convertCurrency(exchangeVal, homeMoney, travelMoney, 1) 
@@ -53,7 +53,9 @@ function getDataFromApi() {
 //Create currency exchange left panel display
 function convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) {
     let currencyPair = `${homeMoney}_${travelMoney}`
-    let exchangedTotal = exchangeVal[currencyPair].val * exchangeTotalAmount;
+    let exchangedTotal = exchangeVal[currencyPair] * exchangeTotalAmount;
+    console.log(exchangeVal[currencyPair].val);
+
     let date = moment(exchangeVal.updated_at);
     let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');     
     converted = `
@@ -64,7 +66,7 @@ function convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmoun
             <label for='js-homeland-currency-input' class='home_currency'>${homeMoney}</label>
             <input placeholder='1.00' type='number' name='js-homeland-currency-input' id='js-homeland-currency-input' autofocus/>
             <button role="button" type="submit" class="js-submit-currency">Submit</button>
-            <p class='oneHomeToTravel'>(1 ${homeMoney}: ${numeral(exchangeVal[currencyPair].val).format('$0,0.00')} ${travelMoney})</p>
+            <p class='oneHomeToTravel'>(1 ${homeMoney}: ${numeral(exchangeVal[currencyPair]).format('$0,0.00')} ${travelMoney})</p>
             <p class='afterExchange'>${exchangeTotalAmount} ${homeMoney} = ${numeral(exchangedTotal).format('$0,0.00')} ${travelMoney}</p>
             <p class='date'>Exchange rate last updated: <br />${currentDate}</p>
             <a href='https://ryanokamuro.github.io/Travel-BankEx/'><img src='https://cdn4.iconfinder.com/data/icons/basic-interface-overcolor/512/home-512.png' alt='home-button'></a>
