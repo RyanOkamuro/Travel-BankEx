@@ -54,8 +54,6 @@ function getDataFromApi() {
 function convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) {
     let currencyPair = `${homeMoney}_${travelMoney}`
     let exchangedTotal = exchangeVal[currencyPair] * exchangeTotalAmount;
-    console.log(exchangeVal[currencyPair].val);
-
     let date = moment(exchangeVal.updated_at);
     let currentDate = date.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a z');     
     converted = `
