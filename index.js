@@ -28,7 +28,7 @@ function getDataFromApi() {
         const settings = {
             'async': true,
             'crossDomain': true,
-            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=ultra&apiKey=dff8030f3fa8049dd14d`,
+            'url': `https://free.currconv.com/api/v7/convert?q=${homeMoney}_${travelMoney}&compact=ultra&apiKey=dff8030f3fa8049dd14d`,
             'method': 'GET',
             'success': function(exchangeVal) { 
                 convertCurrency(exchangeVal, homeMoney, travelMoney, exchangeTotalAmount) 
@@ -40,7 +40,7 @@ function getDataFromApi() {
         const settings2 = {
             'async': true,
             'crossDomain': true,
-            'url': `https://free.currencyconverterapi.com/api/v5/convert?q=${homeMoney}_${travelMoney}&compact=ultra&apiKey=dff8030f3fa8049dd14d`,
+            'url': `https://free.currconv.com/api/v7/convert?q=${homeMoney}_${travelMoney}&compact=ultra&apiKey=dff8030f3fa8049dd14d`,
             'method': 'GET',
             'success': function(exchangeVal) { 
                 convertCurrency(exchangeVal, homeMoney, travelMoney, 1) 
